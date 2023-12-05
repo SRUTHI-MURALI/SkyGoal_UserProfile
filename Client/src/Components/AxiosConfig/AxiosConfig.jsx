@@ -41,16 +41,7 @@ export const userLogin = (email, password) => {
   return axios.post(`${Base_Url}/user/login`, { email, password });
 };
 
-// export const addNotes = (title, summary, content, image, file, userId) => {
-//   return api.post(`/addNotes`, {
-//     title,
-//     summary,
-//     content,
-//     image,
-//     file,
-//     userId,
-//   });
-// };
+
 
 export const getUserProfile = (id) => {
   return api.get(`/getProfile/${id}`);
@@ -61,11 +52,31 @@ export const getUserProfile = (id) => {
 
 
 
-export const editProfile = (title, summary, content, id) => {
-  return api.put(`/editNote/${id}`, {
-    title,
-    summary,
-    content,
+export const editProfile = (id,
+  name,
+  phone,
+  email,
+  password,
+  gender,
+ 
+  age,
+  country) => {
+  return api.put(`/editProfile/${id}`, {
+    
+          name,
+          phone,
+          email,
+          password,
+          gender,
+         
+          age,
+          country
+  });
+};
+
+export const editProfileImage = (id,photo) => {
+  return api.put(`/editImage/${id}`, {
+    photo
   });
 };
 

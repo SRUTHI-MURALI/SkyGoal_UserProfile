@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Profile.css";
 import pic from "../../assets/images.jpeg";
 import { Container, Button } from "react-bootstrap";
-
+import {  useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EditProfile from "../EditProfile/EditProfile.jsx";
@@ -19,7 +19,7 @@ const Body = () => {
   const [user, setUser] = useState([null]);
   const [showEdit, setShowEdit] = useState(false);
 
-
+  const navigate= useNavigate()
   useEffect(() => {
     const getProfileData = async (id) => {
       try {
@@ -34,6 +34,10 @@ const Body = () => {
   }, [showEdit]);
 
  
+  const handleImage = async ()=>{
+   
+    navigate('/editImage')
+  }
 
   
   const handleEditUserProfile = async () => {
@@ -52,7 +56,7 @@ const Body = () => {
         <>
           <div className="col-lg-12">
             <div className="row mt-3">
-              <div className="col-md-3">
+              <div className="col-md-3" >
                 {user?.photo && user?.photo !== "No Pic" ? (
                   <img
                     style={{ width: "200px" }}
@@ -68,7 +72,11 @@ const Body = () => {
                     alt="default"
                   />
                 )}
+                <div>
+                <Button style={{alignContent:'center'}} variant='none' onClick={handleImage}>Change Image</Button>
               </div>
+              </div>
+              
 
               <div className="col-lg-6">
                 <p style={{ color: "#5B5B5B", fontFamily: "Open Sans sans-serif" }}>

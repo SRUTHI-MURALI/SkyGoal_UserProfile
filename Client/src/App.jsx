@@ -6,6 +6,7 @@ import OtpVerify from "./Pages/OtpVerify.jsx";
 import Login from "./Pages/Login.jsx";
 
 import Profile from "./Pages/Profile.jsx"
+import EditImage from "./Components/EditProfile/EditImage.jsx";
 
 
 
@@ -18,7 +19,7 @@ function App() {
           <Route path="/verifyOtp/:email" element={<OtpVerify />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/homePage" element={<Profile/>} />
-         
+          <Route path="/editImage" element={<EditImage/>}/>
           
          
         </Routes>

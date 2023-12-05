@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, Container, Row, Form, Col, Button } from "react-bootstrap";
-import axios from "axios";
-import {  image_upload_url } from "../../../Config/Config";
+
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { editProfile, getUserProfile } from "../AxiosConfig/AxiosConfig";
@@ -17,10 +16,7 @@ function EditProfile({ user, onClose }) {
   const [password, setPassword] = useState("");
   const [age, setAge] = useState("");
   const [country, setCountry] = useState("");
-//   const [image, setImage] = useState(null);
-//   const [cloudinaryURL, setCloudinaryURL] = useState("");
-//   const [existingImage, setExistingImage] = useState("");
-//   const [photo, setPhoto] = useState("");
+
 
   useEffect(() => {
     const getProfileData = async (id) => {
@@ -28,14 +24,14 @@ function EditProfile({ user, onClose }) {
         const response = await getUserProfile(id);
         const profile = response.data.user;
 
-        setName(profile?.name || "");
-        setEmail(profile?.email || "");
-        setPassword(profile?.password || "");
-        setGender(profile?.gender || "");
-        setPhone(profile?.phone || "");
-        setAge(profile?.age || "");
-        setCountry(profile?.country || "");
-        // setExistingImage(profile?.photo || "");
+        setName(profile[0]?.name || "");
+        setEmail(profile[0]?.email || "");
+        setPassword(profile[0]?.password || "");
+        setGender(profile[0]?.gender || "");
+        setPhone(profile[0]?.phone || "");
+        setAge(profile[0]?.age || "");
+        setCountry(profile[0]?.country || "");
+        console.log(name,'name');
       } catch (error) {
         console.log({ error });
       }
@@ -46,13 +42,7 @@ function EditProfile({ user, onClose }) {
   const handleEditUserProfile = async (e) => {
     e.preventDefault();
 
-    // if (image) {
-    //   await imageHandler();
-    // } else if (existingImage) {
-    //   setPhoto(existingImage);
-    // } else {
-    //   setPhoto("No Pic");
-    // }
+    
     const namePattern = /^[A-Za-z\s.]+$/;
     if (name === "") {
       setName("No Name");
@@ -103,7 +93,6 @@ function EditProfile({ user, onClose }) {
           email,
           password,
           gender,
-         
           age,
           country
         );
@@ -120,21 +109,7 @@ function EditProfile({ user, onClose }) {
     onClose(false);
   };
 
-//   const imageHandler = async () => {
-//     const formData = new FormData();
-//     formData.append("file", image );
-//     formData.append("upload_preset", "studentImage");
-//     formData.append("cloud_name", "dnkc0odiw");
-//     await axios
-//       .post(`${image_upload_url}`, formData)
-//       .then((response) => {
-//         setCloudinaryURL(response.data.public_id);
-//         setPhoto(cloudinaryURL);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   };
+console.log(name,'jj');
 
   return (
     <>
@@ -262,28 +237,7 @@ function EditProfile({ user, onClose }) {
                 </Row>
               </Form>
             </Col>
-            {/* <Col xs={12} md={6}>
-              <Form.Group controlId="formFile" className="mb-3">
-                <Form.Label className="m-5"></Form.Label>
-                <img
-                  style={{ maxWidth: "50%" }}
-                  src={`${Image_Url}/${existingImage}`}
-                  alt="profile"
-                  className="rounded-circle img-fluid"
-                />
-                <Form.Control
-                  className="mt-5"
-                  type="file"
-                  onChange={(e) => {
-                    const inputElement = e.target;
-                    if (inputElement && inputElement.files) {
-                      const selectedFile = inputElement.files[0];
-                      setImage(selectedFile);
-                    }
-                  }}
-                />
-              </Form.Group>
-            </Col> */}
+           
           </Row>
           </Container>
         </Card>
