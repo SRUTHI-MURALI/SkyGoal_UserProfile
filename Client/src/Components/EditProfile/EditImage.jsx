@@ -22,7 +22,7 @@ function EditImage() {
         const response = await getUserProfile(id);
         const profile = response.data.user;
       
-        setExistingImage(profile?.photo || '');
+        setExistingImage(profile[0]?.photo || '');
       } catch (error) {
         console.log({ error });
       }
@@ -76,7 +76,7 @@ function EditImage() {
       const response = await axios.post(`${image_upload_url}`, formData);
       setCloudinaryURL(response.data.public_id);
       setPhoto(response.data.public_id);
-      console.log(response.data.public_id,'kjkjkjk');
+      
     } catch (err) {
       console.error('Error handling image:', err);
       throw err;

@@ -57,10 +57,10 @@ const Body = () => {
           <div className="col-lg-12">
             <div className="row mt-3">
               <div className="col-md-3" >
-                {user?.photo && user?.photo !== "No Pic" ? (
+                {user[0]?.photo && user[0]?.photo !== "No Pic" ? (
                   <img
                     style={{ width: "200px" }}
-                    src={`${Image_Url}/${user?.photo}`}
+                    src={`${Image_Url}/${user[0]?.photo}`}
                     alt="profile"
                     className="rounded-circle"
                   />

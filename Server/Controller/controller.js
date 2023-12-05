@@ -185,7 +185,7 @@ const user = await userSchema.findOne({ email })
       if (user) {
         await userSchema.findByIdAndUpdate(id, {
           photo,
-        });
+        },{new:true});
   
         const updatedUser = await userSchema.findById(id);
  
