@@ -5,7 +5,7 @@ import { userLoggedIn } from "../Middleware/auth.js"
 import {
   userRegisterSendOtp,
   userRegisterVerifyOtp,
-  userLogin,userGetProfile,userGetEditProfile,userUpdateProfile
+  userLogin,userGetProfile,userUpdateProfile
 } from "../Controller/controller.js"
 
 
@@ -20,9 +20,9 @@ userRouter.post("/login", userLogin);
 
 /**************************** User Note Management  *************************************/
 
-userRouter.get("/getNotes/:id", userLoggedIn, userGetProfile);
-userRouter.get("/getEditData/:id", userLoggedIn, userGetEditProfile);
-userRouter.put("/editNote/:id", userLoggedIn, userUpdateProfile);
+userRouter.get("/getProfile/:id", userLoggedIn, userGetProfile);
+
+userRouter.put("/editProfile/:id", userLoggedIn, userUpdateProfile);
 
 
 export default userRouter;

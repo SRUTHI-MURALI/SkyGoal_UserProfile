@@ -1,4 +1,4 @@
-import userSchema from "../Model/userModel.js";
+import userSchema from "../Model/userModel.js"
 import bcrypt from "bcrypt";
 import generateToken from "../TokenGenerator/generateToken.js"
 import generateOtp from "../OtpGenerator/generateOTP.js"
@@ -80,11 +80,13 @@ const userRegisterVerifyOtp = async (req, res) => {
 /**************************** User Login  *************************************/
 
 const userLogin = async (req, res) => {
+  
   try {
     const { email, password } = req.body;
 
-    const user = await userSchema.findOne({ email });
+const user = await userSchema.findOne({ email })
 
+ 
     if (user) {
       const isMatchPassword = await bcrypt.compare(password, user.password);
       if (isMatchPassword) {
@@ -96,6 +98,7 @@ const userLogin = async (req, res) => {
           phone: user?.phone,
           token,
         });
+       
       } else {
         res.status(401).json({ error: "Invalid password" });
       }
@@ -116,62 +119,46 @@ const userLogin = async (req, res) => {
     try {
       const { id } = req.params;
   
-      const notesFind = await noteSchema.find({ author: id });
-  
-      if (notesFind) {
-        res.status(200).json({ notesFind });
+      const user = await userSchema.find({ _id: id });
+
+      if (user) {
+        res.status(200).json({ user });
       } else {
-        res.status(500).json({ message: "no notes to display" });
+        res.status(500).json({ message: "no user to display" });
       }
     } catch (error) {
       res.status(500).json({ error: "Internal Server Error" });
     }
   };
   
-  /**************************** User get edit Notes *************************************/
   
-  const userGetEditProfile = async (req, res) => {
-    try {
-      const { id } = req.params;
   
-      const notesFind = await noteSchema.find({ _id: id });
-  
-      if (notesFind) {
-        res.status(200).json({ notesFind });
-      } else {
-        res.status(500).json({ message: "no notes to display" });
-      }
-    } catch (error) {
-      res.status(500).json({ error: "Internal Server Error" });
-    }
-  };
-  
-  /**************************** User Update Notes *************************************/
+  /**************************** User Update Profile *************************************/
   
   const userUpdateProfile = async (req, res) => {
     try {
       const { id } = req.params;
       const { title, summary, content } = req.body;
   
-      const notesFind = await noteSchema.findById(id);
+      const user = await userSchema.findById(id);
   
-      if (notesFind) {
-        await noteSchema.findByIdAndUpdate(id, {
+      if (user) {
+        await userSchema.findByIdAndUpdate(id, {
           title,
           summary,
   
           content,
         });
   
-        const updatedNote = await noteSchema.findById(id);
+        const updatedUser = await userSchema.findById(id);
   
-        res.status(200).json({ updatedNote });
+        res.status(200).json({ updatedUser });
       } else {
-        res.status(404).json({ message: "Note not found" });
+        res.status(404).json({ message: "user not found" });
       }
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Internal Server Error" });
     }
   };
-export { userRegisterSendOtp, userRegisterVerifyOtp, userLogin ,userGetProfile,userGetEditProfile,userUpdateProfile};
+export { userRegisterSendOtp, userRegisterVerifyOtp, userLogin ,userGetProfile,userUpdateProfile};
