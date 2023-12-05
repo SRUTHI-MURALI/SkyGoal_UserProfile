@@ -4,10 +4,11 @@ import Register from "./Pages/Register.jsx";
 
 import OtpVerify from "./Pages/OtpVerify.jsx";
 import Login from "./Pages/Login.jsx";
-import Home from "./Pages/Home.jsx";
-import AddNotes from "./Pages/AddNotes.jsx";
-import EditNotes from "./Pages/EditNotes.jsx";
-import TaggedNotes from "./Pages/TaggedNotes.jsx";
+
+
+
+import Profile from "../Pages/Profile.jsx";
+import EditProfile from "../Pages/EditProfile.jsx";
 
 function App() {
   return (
@@ -17,10 +18,10 @@ function App() {
           <Route path="/" element={<Register />} />
           <Route path="/verifyOtp/:email" element={<OtpVerify />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/homePage" element={<Home />} />
-          <Route path="/addNotes" element={<AddNotes />} />
-          <Route path="/editNote/:id" element={<EditNotes />} />
-          <Route path="/tagsPage" element={<TaggedNotes />} />
+          <Route path="/homePage" element={<Profile />} />
+         
+          <Route path="/editNote/:id" element={<EditProfile />} />
+         
         </Routes>
       </Router>
     </>
