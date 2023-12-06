@@ -86,11 +86,11 @@ function EditImage() {
   return (
     <div>
       <ToastContainer position="top-center" autoClose={3000}></ToastContainer>
-      <Container>
+      <Container className="d-flex align-items-center justify-content-center">
   <Row className="d-flex justify-content-center align-items-center" style={{ width: '30rem' }}>
     <Form.Group controlId="formFile" className="mb-3">
       <Form.Label className="m-5"></Form.Label>
-      <div className="col-md-3">
+      <div className=" d-flex align-items-center justify-content-center">
         {existingImage ? (
           <img
             style={{ width: "200px", height: "240px" }}

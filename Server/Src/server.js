@@ -10,7 +10,7 @@ dotenv.config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 connectDB();
-const port = process.env.port;
+const port = process.env.PORT;
 
 app.use("/user", router);
 
@@ -18,4 +18,4 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.listen(port);
+app.listen(port|| 3001);
