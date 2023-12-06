@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import 'bootstrap/dist/css/bootstrap.css';
+import "bootstrap/dist/css/bootstrap.css";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import { Col, Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import './Register.css'
+import "./Register.css";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {SendOtp } from "../AxiosConfig/AxiosConfig";
-
+import { SendOtp } from "../AxiosConfig/AxiosConfig";
 
 function RegisterForm() {
   const [userName, setUserName] = useState("");
@@ -24,7 +23,7 @@ function RegisterForm() {
     e.preventDefault();
     const trimmedName = userName.trim();
     const trimmedPassword = password.trim();
-    const trimmedPhone = phone 
+    const trimmedPhone = phone;
     const trimmedEmail = email.trim();
     const trimmedConfirmPassword = confirmPassword.trim();
 
@@ -55,29 +54,28 @@ function RegisterForm() {
     // Validate email format
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const emailP = /^[^\s@]+@gmail\.com$/;
-    if (!emailPattern.test(trimmedEmail.trim()) || !emailP.test(trimmedEmail.trim())) {
+    if (
+      !emailPattern.test(trimmedEmail.trim()) ||
+      !emailP.test(trimmedEmail.trim())
+    ) {
       toast.error("Please enter a valid email address");
       return;
     }
     if (trimmedPassword !== trimmedConfirmPassword) {
-
       toast.error("password mismatch");
       return;
-    }else{
+    } else {
       const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,}$/;
-      if(!regex.test(trimmedPassword)){
-        toast.error("Password should be 8 characters and should contain a lowercase letter , a uppercase letter , a number and a symbol ");
+      if (!regex.test(trimmedPassword)) {
+        toast.error(
+          "Password should be 8 characters and should contain a lowercase letter , a uppercase letter , a number and a symbol "
+        );
         return;
       }
     }
 
     try {
-      await SendOtp(
-        trimmedName,
-        trimmedEmail,
-        trimmedPhone,
-        trimmedPassword
-      );
+      await SendOtp(trimmedName, trimmedEmail, trimmedPhone, trimmedPassword);
 
       handleNavigation(trimmedEmail);
     } catch (error) {
@@ -91,11 +89,10 @@ function RegisterForm() {
   };
 
   return (
-    <Container className="mt-5"style={{width:'50rem'}}>
-      <Card style={{backgroundColor:" rgb(139, 179, 198)"}}>
+    <Container className="mt-5" style={{ width: "50rem" }}>
+      <Card style={{ backgroundColor: " rgb(139, 179, 198)" }}>
         <ToastContainer position="top-center"></ToastContainer>
         <Row className="m-3">
-          
           <Col xs={12} md={12}>
             <h1 style={{ textAlign: "center" }} className="mt-5">
               User Register Form

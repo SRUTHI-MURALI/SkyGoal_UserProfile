@@ -43,8 +43,10 @@ function OtpVerificationForm({ email }) {
   };
 
   return (
-    <Container className="d-flex align-items-center justify-content-center"
-    style={{ height: "100vh" }}>
+    <Container
+      className="d-flex align-items-center justify-content-center"
+      style={{ height: "100vh" }}
+    >
       <ToastContainer position="top-center" autoClose={3000}></ToastContainer>
       <Card
         style={{ width: "18rem", backgroundColor: " rgb(139, 179, 198)" }}

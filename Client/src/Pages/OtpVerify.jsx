@@ -1,15 +1,15 @@
-import React from 'react'
-import { useParams } from 'react-router-dom';
-import OtpVerificationForm from '../Components/UserOtpVerify/OtpVerificationForm';
+import React from "react";
+import { useParams } from "react-router-dom";
+import OtpVerificationForm from "../Components/UserOtpVerify/OtpVerificationForm";
 
 function OtpVerify() {
-    const { email } = useParams();
-  
+  const { email } = useParams();
+
   return (
     <div>
-      <OtpVerificationForm email={email}/>
+      <OtpVerificationForm email={email} />
     </div>
-  )
+  );
 }
 
-export default OtpVerify
+export default OtpVerify;

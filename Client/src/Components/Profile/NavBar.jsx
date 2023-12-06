@@ -2,10 +2,9 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Nav, Navbar } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../assets/logo.png"
+import logo from "../../assets/logo.png";
 import { useDispatch } from "react-redux";
 import { logout } from "../Redux/UserSlice";
-
 
 import "./Profile.css";
 
@@ -15,10 +14,6 @@ function NavBar() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  
-
- 
 
   const handleLogout = async () => {
     localStorage.removeItem("userData");
@@ -57,7 +52,6 @@ function NavBar() {
             Welcome {parseData?.name}{" "}
           </h1>
         </div>
-       
 
         <div className="ms-auto">
           <Link onClick={handleLogout}>

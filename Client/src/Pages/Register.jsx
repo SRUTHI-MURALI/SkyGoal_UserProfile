@@ -1,12 +1,12 @@
-import React from 'react'
-import RegisterForm from '../Components/UserRegister/RegisterForm'
+import React from "react";
+import RegisterForm from "../Components/UserRegister/RegisterForm";
 
 function Register() {
   return (
     <div>
-      <RegisterForm/>
+      <RegisterForm />
     </div>
-  )
+  );
 }
 
-export default Register
+export default Register;

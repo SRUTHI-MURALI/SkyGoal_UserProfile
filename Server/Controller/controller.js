@@ -1,8 +1,8 @@
-import userSchema from "../Model/userModel.js"
+import userSchema from "../Model/userModel.js";
 import bcrypt from "bcrypt";
-import generateToken from "../TokenGenerator/generateToken.js"
-import generateOtp from "../OtpGenerator/generateOTP.js"
-import verifyOtp from "../OtpGenerator/verifyOTP.js"
+import generateToken from "../TokenGenerator/generateToken.js";
+import generateOtp from "../OtpGenerator/generateOTP.js";
+import verifyOtp from "../OtpGenerator/verifyOTP.js";
 
 let globalData = {};
 
@@ -80,13 +80,11 @@ const userRegisterVerifyOtp = async (req, res) => {
 /**************************** User Login  *************************************/
 
 const userLogin = async (req, res) => {
-  
   try {
     const { email, password } = req.body;
 
-const user = await userSchema.findOne({ email })
+    const user = await userSchema.findOne({ email });
 
- 
     if (user) {
       const isMatchPassword = await bcrypt.compare(password, user.password);
       if (isMatchPassword) {
@@ -98,7 +96,6 @@ const user = await userSchema.findOne({ email })
           phone: user?.phone,
           token,
         });
-       
       } else {
         res.status(401).json({ error: "Invalid password" });
       }
@@ -111,91 +108,94 @@ const user = await userSchema.findOne({ email })
   }
 };
 
+/**************************** User get Notes *************************************/
 
-  
-  /**************************** User get Notes *************************************/
-  
-  const userGetProfile = async (req, res) => {
-    try {
-      const { id } = req.params;
- 
-      const user = await userSchema.find({ _id: id });
+const userGetProfile = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-      if (user) {
-        res.status(200).json({ user });
-      } else {
-        res.status(500).json({ message: "no user to display" });
-      }
-    } catch (error) {
-      res.status(500).json({ error: "Internal Server Error" });
+    const user = await userSchema.find({ _id: id });
+
+    if (user) {
+      res.status(200).json({ user });
+    } else {
+      res.status(500).json({ message: "no user to display" });
     }
-  };
-  
-  
-  
-  /**************************** User Update Profile *************************************/
-  
-  const userUpdateProfile = async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { 
-        name,
-        phone,
-        email,
-        password,
-        gender,
-        age,
-        country} = req.body;
- 
-      const user = await userSchema.findById(id);
-  
-      if (user) {
-        await userSchema.findByIdAndUpdate(id, {
-         
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+/**************************** User Update Profile *************************************/
+
+const userUpdateProfile = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, phone, email, password, gender, age, country } = req.body;
+
+    const user = await userSchema.findById(id);
+
+    if (user) {
+      await userSchema.findByIdAndUpdate(
+        id,
+        {
           name,
           phone,
           email,
           password,
           gender,
           age,
-          country
-        },{new:true});
-  
-        const updatedUser = await userSchema.findById(id);
-       
-        res.status(200).json({ updatedUser });
-      } else {
-        res.status(404).json({ message: "user not found" });
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
-  };
+          country,
+        },
+        { new: true }
+      );
 
-   /**************************** User Update Profile Image *************************************/
-  
-   const userUpdateProfileImage = async (req, res) => {
-    try {
-      const { id } = req.params;
-      const { photo } = req.body;
-  
-      const user = await userSchema.findById(id);
-  
-      if (user) {
-        await userSchema.findByIdAndUpdate(id, {
-          photo,
-        },{new:true});
-  
-        const updatedUser = await userSchema.findById(id);
- 
-        res.status(200).json({ updatedUser });
-      } else {
-        res.status(404).json({ message: "user not found" });
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
+      const updatedUser = await userSchema.findById(id);
+
+      res.status(200).json({ updatedUser });
+    } else {
+      res.status(404).json({ message: "user not found" });
     }
-  };
-export { userRegisterSendOtp, userRegisterVerifyOtp, userLogin ,userGetProfile,userUpdateProfile,userUpdateProfileImage};
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+/**************************** User Update Profile Image *************************************/
+
+const userUpdateProfileImage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { photo } = req.body;
+
+    const user = await userSchema.findById(id);
+
+    if (user) {
+      await userSchema.findByIdAndUpdate(
+        id,
+        {
+          photo,
+        },
+        { new: true }
+      );
+
+      const updatedUser = await userSchema.findById(id);
+
+      res.status(200).json({ updatedUser });
+    } else {
+      res.status(404).json({ message: "user not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+export {
+  userRegisterSendOtp,
+  userRegisterVerifyOtp,
+  userLogin,
+  userGetProfile,
+  userUpdateProfile,
+  userUpdateProfileImage,
+};

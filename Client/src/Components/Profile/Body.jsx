@@ -2,30 +2,26 @@ import React, { useState, useEffect } from "react";
 import "./Profile.css";
 import pic from "../../assets/images.jpeg";
 import { Container, Button } from "react-bootstrap";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import EditProfile from "../EditProfile/EditProfile.jsx";
 import { getUserProfile } from "../AxiosConfig/AxiosConfig.jsx";
 import { Image_Url } from "../../../Config/Config.jsx";
 
-
-
-
 const Body = () => {
-    const userData = localStorage.getItem("userData");
-    const parseData = userData ? JSON.parse(userData) : null;
+  const userData = localStorage.getItem("userData");
+  const parseData = userData ? JSON.parse(userData) : null;
 
   const [user, setUser] = useState([null]);
   const [showEdit, setShowEdit] = useState(false);
 
-  const navigate= useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     const getProfileData = async (id) => {
       try {
         const response = await getUserProfile(id);
         setUser(response.data.user);
-     
       } catch (error) {
         console.log({ error });
       }
@@ -33,13 +29,10 @@ const Body = () => {
     getProfileData(parseData._id);
   }, [showEdit]);
 
- 
-  const handleImage = async ()=>{
-   
-    navigate('/editImage')
-  }
+  const handleImage = async () => {
+    navigate("/editImage");
+  };
 
-  
   const handleEditUserProfile = async () => {
     setShowEdit(true);
   };
@@ -48,7 +41,6 @@ const Body = () => {
     setShowEdit(false);
   };
 
-
   return (
     <Container className="bodyContainer">
       <ToastContainer position="top-center" autoClose={3000}></ToastContainer>
@@ -56,7 +48,7 @@ const Body = () => {
         <>
           <div className="col-lg-12">
             <div className="row mt-3">
-              <div className="col-md-3" >
+              <div className="col-md-3">
                 {user[0]?.photo && user[0]?.photo !== "No Pic" ? (
                   <img
                     style={{ width: "200px" }}
@@ -66,20 +58,30 @@ const Body = () => {
                   />
                 ) : (
                   <img
-                    style={{ width: "200px",height:"240px" }}
+                    style={{ width: "200px", height: "240px" }}
                     src={pic}
                     className="rounded-circle"
                     alt="default"
                   />
                 )}
                 <div>
-                <Button style={{alignContent:'center'}} variant='none' onClick={handleImage}>Change Image</Button>
+                  <Button
+                    style={{ alignContent: "center" }}
+                    variant="none"
+                    onClick={handleImage}
+                  >
+                    Change Image
+                  </Button>
+                </div>
               </div>
-              </div>
-              
 
               <div className="col-lg-6">
-                <p style={{ color: "#5B5B5B", fontFamily: "Open Sans sans-serif" }}>
+                <p
+                  style={{
+                    color: "#5B5B5B",
+                    fontFamily: "Open Sans sans-serif",
+                  }}
+                >
                   <h4>Name : {user[0]?.name}</h4>
                   <h4>Gender : {user[0]?.gender}</h4>
                   <h4>Age : {user[0]?.age}</h4>
@@ -93,7 +95,6 @@ const Body = () => {
               </div>
             </div>
           </div>
-         
         </>
       ) : (
         <EditProfile onClose={handleClose} user={user[0]?._id} />

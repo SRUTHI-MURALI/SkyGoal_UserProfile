@@ -19,25 +19,19 @@ const userSchema = new Schema({
   },
   photo: {
     type: String,
-   
   },
   gender: {
     type: String,
-   
   },
   age: {
     type: Number,
-   
   },
   country: {
     type: String,
-   
   },
   state: {
     type: String,
-    
   },
-
 });
 
 export default model("user", userSchema);

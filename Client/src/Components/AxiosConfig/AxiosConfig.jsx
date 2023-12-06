@@ -41,46 +41,37 @@ export const userLogin = (email, password) => {
   return axios.post(`${Base_Url}/user/login`, { email, password });
 };
 
-
-
 export const getUserProfile = (id) => {
   return api.get(`/getProfile/${id}`);
 };
 
-
-
-
-
-
-export const editProfile = (id,
+export const editProfile = (
+  id,
   name,
   phone,
   email,
   password,
   gender,
- 
+
   age,
-  country) => {
+  country
+) => {
   return api.put(`/editProfile/${id}`, {
-    
-          name,
-          phone,
-          email,
-          password,
-          gender,
-         
-          age,
-          country
+    name,
+    phone,
+    email,
+    password,
+    gender,
+
+    age,
+    country,
   });
 };
 
-export const editProfileImage = (id,photo) => {
+export const editProfileImage = (id, photo) => {
   return api.put(`/editImage/${id}`, {
-    photo
+    photo,
   });
 };
-
-
-
 
 export default api;
